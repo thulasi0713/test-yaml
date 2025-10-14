@@ -1,3 +1,4 @@
+# test trigger for Codacy
 #% Rest Connector Descriptor 1.0
 
 apiSpec:
@@ -916,3 +917,4 @@ Allowed values: `lti_guid`, `registration_settings`, `services`, `course_count`,
             id:
               displayName: id
         ignored: false
+
