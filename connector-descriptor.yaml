@@ -1,4 +1,4 @@
-# retry Codacy trigger
+# reanalyze codacy test
 #% Rest Connector Descriptor 1.0
 
 apiSpec:
@@ -28,3 +28,4 @@ endpoints:
             id:
               displayName: id
         ignored: false
+
