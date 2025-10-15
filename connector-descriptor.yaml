@@ -1,19 +1,21 @@
-# reanalyze codacy test
+# reanalyze codacy test 
 #% Rest Connector Descriptor 1.0
 
 apiSpec:
-  url: 'C:\Users\SumalathaVarikallu\Documents\canvasv3\canvas-lms-api.raml'
+  # ❌ Issue 1: Insecure HTTP URL instead of HTTPS
+  url: 'http://canvasv3.instructure.com/api/v1/canvas-lms-api.raml'
 
 connectorName: CanvasRestLms
 
 connectorGav:
   groupId: com.mulesoft.connectors
   artifactId: canvas-lms-api
-  version: 1.0.0-SNAPSHOT
+  # ❌ Issue 2: Using "latest" tag version is bad practice (should be fixed version)
+  version: latest
 
 baseUri:
   value: 'https://canvas.instructure.com/api/v1'
-      type: parameter   # ❌ Mistake 1 — wrong indentation (extra spaces)
+      type: parameter   # ❌ Issue 3: Wrong indentation (extra spaces)
 
 endpoints:
   /users/{id}:
@@ -21,11 +23,10 @@ endpoints:
     operations:
       get:
         displayName: Get user details by ID
-        description Get user details by ID   # ❌ Mistake 2 — missing colon (:)
+        description Get user details by ID   # ❌ Issue 4: Missing colon (syntax)
         outputMediaType: application/json
         expects:
           uriParameters:
             id:
               displayName: id
         ignored: false
-
