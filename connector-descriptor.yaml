@@ -3,7 +3,7 @@
 
 apiSpec:
   # ❌ Issue 1: Insecure HTTP URL instead of HTTPS
-  url: 'http://canvasv3.instructure.com/api/v1/canvas-lms-api.raml'
+  url: 'https://canvasv3.instructure.com/api/v1/canvas-lms-api.raml'
 
 connectorName: CanvasRestLms
 
@@ -30,3 +30,4 @@ endpoints:
             id:
               displayName: id
         ignored: false
+
