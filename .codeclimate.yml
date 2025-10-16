@@ -1,0 +1,20 @@
+version: "2"
+plugins:
+  yaml-lint:
+    enabled: true
+    channel: stable
+  duplication:
+    enabled: true
+    config:
+      languages:
+        - yaml
+  fixme:
+    enabled: true
+ratings:
+  paths:
+    - "connector-descriptor.yaml"
+    - "**/*.yaml"
+    - "**/*.yml"
+exclude_patterns:
+  - "node_modules/"
+  - "tests/"
