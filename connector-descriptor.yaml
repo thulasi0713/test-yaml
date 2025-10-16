@@ -1,33 +1,19 @@
-# reanalyze codacy test 
+# reanalyze codacy test
 #% Rest Connector Descriptor 1.0
 
 apiSpec:
-  # ❌ Issue 1: Insecure HTTP URL instead of HTTPS
-  url: 'https://canvasv3.instructure.com/api/v1/canvas-lms-api.raml'
+  # ❌ Insecure HTTP — Checkov will flag this
+  url: 'http://canvasv3.instructure.com/api/v1/canvas-lms-api.raml'
 
 connectorName: CanvasRestLms
 
 connectorGav:
   groupId: com.mulesoft.connectors
   artifactId: canvas-lms-api
-  # ❌ Issue 2: Using "latest" tag version is bad practice (should be fixed version)
+  # ❌ "latest" tag — bad practice
   version: latest
 
-baseUri:
-  value: 'https://canvas.instructure.com/api/v1'
-      type: parameter   # ❌ Issue 3: Wrong indentation (extra spaces)
-
-endpoints:
-  /users/{id}:
-    ignored: false
-    operations:
-      get:
-        displayName: Get user details by ID
-        description Get user details by ID   # ❌ Issue 4: Missing colon (syntax)
-        outputMediaType: application/json
-        expects:
-          uriParameters:
-            id:
-              displayName: id
-        ignored: false
-
+# ❌ Missing colon and wrong indent
+baseUri
+   value: 'https://canvas.instructure.com/api/v1'
+   type: parameter
