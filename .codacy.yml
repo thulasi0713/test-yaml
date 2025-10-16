@@ -3,6 +3,8 @@ engines:
     enabled: true
   semgrep:
     enabled: true
+
 files:
   include:
-    - "connector-descriptor.yaml"
+    - "**/*.yaml"
+    - "**/*.yml"
