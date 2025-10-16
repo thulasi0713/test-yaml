@@ -1,19 +1,918 @@
-# reanalyze codacy test
 #% Rest Connector Descriptor 1.0
 
 apiSpec:
-  # ❌ Insecure HTTP — Checkov will flag this
-  url: 'http://canvasv3.instructure.com/api/v1/canvas-lms-api.raml'
+  url: 'C:\Users\SumalathaVarikallu\Documents\canvasv3\canvas-lms-api.raml'
 
 connectorName: CanvasRestLms
 
 connectorGav:
   groupId: com.mulesoft.connectors
   artifactId: canvas-lms-api
-  # ❌ "latest" tag — bad practice
-  version: latest
+  version: 1.0.0-SNAPSHOT
 
-# ❌ Missing colon and wrong indent
-baseUri
-   value: 'https://canvas.instructure.com/api/v1'
-   type: parameter
+baseUri:
+  value: 'https://canvas.instructure.com/api/v1'
+  type: parameter
+
+endpoints:
+  /users/{id}:
+    ignored: false
+    operations:
+      get:
+        displayName: Get user details by ID
+        description: Get user details by ID
+        outputMediaType: application/json
+        expects:
+          uriParameters:
+            id:
+              displayName: id
+        ignored: false
+      put:
+        displayName: Update user by ID
+        description: Modify an existing user.
+        inputMediaType: application/json
+        outputMediaType: application/json
+        expects:
+          uriParameters:
+            id:
+              displayName: id
+        ignored: false
+  /courses/{id}:
+    ignored: false
+    operations:
+      get:
+        displayName: Get courses by ID
+        description: Get courses by ID
+        outputMediaType: application/json
+        expects:
+          uriParameters:
+            id:
+              displayName: id
+        ignored: false
+      delete:
+        displayName: Delete course
+        description: Delete course
+        outputMediaType: application/json
+        expects:
+          queryParameters:
+            event:
+              displayName: event
+          uriParameters:
+            id:
+              displayName: id
+        ignored: false
+      put:
+        displayName: Update course
+        description: Update course
+        inputMediaType: application/json
+        outputMediaType: application/json
+        expects:
+          uriParameters:
+            id:
+              displayName: id
+        ignored: false
+  /accounts/{account_id}/courses:
+    ignored: false
+    operations:
+      post:
+        displayName: Create course
+        description: Create course
+        inputMediaType: application/json
+        outputMediaType: application/json
+        expects:
+          uriParameters:
+            account_id:
+              displayName: Account id
+        ignored: false
+      get:
+        displayName: List active courses in an account
+        description: List active courses in an account
+        outputMediaType: application/json
+        expects:
+          queryParameters:
+            with_enrollments:
+              displayName: With enrollments
+            enrollment_type[]:
+              displayName: 'Enrollment type[]'
+            enrollment_workflow_state[]:
+              displayName: 'Enrollment workflow state[]'
+            published:
+              displayName: published
+            completed:
+              displayName: completed
+            blueprint:
+              displayName: blueprint
+            blueprint_associated:
+              displayName: Blueprint associated
+            public:
+              displayName: public
+            by_teachers[]:
+              displayName: 'By teachers[]'
+            by_subaccounts[]:
+              displayName: 'By subaccounts[]'
+            hide_enrollmentless_courses:
+              displayName: Hide enrollmentless courses
+            state[]:
+              displayName: 'state[]'
+            enrollment_term_id:
+              displayName: Enrollment term id
+            search_term:
+              displayName: Search term
+            include[]:
+              displayName: 'include[]'
+            sort:
+              displayName: sort
+            order:
+              displayName: order
+            search_by:
+              displayName: Search by
+            starts_before:
+              displayName: Starts before
+            ends_after:
+              displayName: Ends after
+            homeroom:
+              displayName: homeroom
+          uriParameters:
+            account_id:
+              displayName: Account id
+        ignored: false
+  /accounts/{account_id}/users:
+    ignored: false
+    operations:
+      get:
+        displayName: List users in account
+        description: List users in account
+        outputMediaType: application/json
+        expects:
+          uriParameters:
+            account_id:
+              displayName: Account id
+        ignored: false
+      post:
+        displayName: Create user
+        description: Create and return a new user and pseudonym for an account.
+        inputMediaType: application/json
+        outputMediaType: application/json
+        expects:
+          uriParameters:
+            account_id:
+              displayName: Account id
+        ignored: false
+  /users/self/upcoming_events:
+    ignored: false
+    operations:
+      get:
+        displayName: upcoming Events
+        description: upcoming Events
+        outputMediaType: application/json
+        ignored: false
+  /users/{user_id}/missing_submissions:
+    ignored: false
+    operations:
+      get:
+        displayName: list Missing Submission
+        description: list Missing Submission
+        outputMediaType: application/json
+        expects:
+          queryParameters:
+            user_id:
+              displayName: User id
+            observed_user_id:
+              displayName: Observed user id
+            include[]:
+              displayName: 'include[]'
+            filter[]:
+              displayName: 'filter[]'
+            course_ids[]:
+              displayName: 'Course ids[]'
+          uriParameters:
+            user_id:
+              displayName: User id
+        ignored: false
+  /courses/{course_id}/search_users:
+    ignored: false
+    operations:
+      get:
+        displayName: list Users in Course
+        description: list Users in Course
+        outputMediaType: application/json
+        expects:
+          queryParameters:
+            search_term:
+              displayName: Search term
+            sort:
+              displayName: sort
+            enrollment_type[]:
+              displayName: 'Enrollment type[]'
+            enrollment_role:
+              displayName: Enrollment role
+            enrollment_role_id:
+              displayName: Enrollment role id
+            include[]:
+              displayName: 'include[]'
+            user_ids[]:
+              displayName: 'User ids[]'
+            enrollment_state[]:
+              displayName: 'Enrollment state[]'
+          uriParameters:
+            course_id:
+              displayName: Course id
+        ignored: false
+  /courses/{course_id}/users/{id}:
+    ignored: false
+    operations:
+      get:
+        displayName: get single user
+        description: get single user
+        outputMediaType: application/json
+        expects:
+          uriParameters:
+            course_id:
+              displayName: Course id
+            id:
+              displayName: id
+        ignored: false
+  /users/{user_id}/courses:
+    ignored: false
+    operations:
+      get:
+        displayName: List courses for a user
+        description: List courses for a user
+        outputMediaType: application/json
+        expects:
+          uriParameters:
+            user_id:
+              displayName: User id
+        ignored: false
+  /courses/{course_id}/users/{user_id}/progress:
+    ignored: false
+    operations:
+      get:
+        displayName: Get user progress
+        description: Get user progress
+        outputMediaType: application/json
+        expects:
+          uriParameters:
+            course_id:
+              displayName: Course id
+            user_id:
+              displayName: User id
+        ignored: false
+  /courses/{course_id}/bulk_user_progress:
+    ignored: false
+    operations:
+      get:
+        displayName: Get bulk user progress
+        description: Get bulk user progress
+        outputMediaType: application/json
+        expects:
+          uriParameters:
+            course_id:
+              displayName: Course id
+        ignored: false
+  /courses/{course_id}/assignment_groups:
+    ignored: false
+    operations:
+      get:
+        displayName: List assignment groups
+        description: List assignment groups
+        outputMediaType: application/json
+        expects:
+          uriParameters:
+            course_id:
+              displayName: Course id
+        ignored: false
+  /accounts/{account_id}/roles:
+    ignored: false
+    operations:
+      get:
+        displayName: List roles
+        description: Returns the paginated list of roles in the account.
+        outputMediaType: application/json
+        expects:
+          queryParameters:
+            account_id:
+              displayName: Account id
+            state[]:
+              displayName: 'state[]'
+            show_inherited:
+              displayName: Show inherited
+          uriParameters:
+            account_id:
+              displayName: Account id
+        ignored: false
+  /accounts/{account_id}/roles/{id}:
+    ignored: false
+    operations:
+      get:
+        displayName: Get role
+        description: Retrieve details for a single role.
+        outputMediaType: application/json
+        expects:
+          queryParameters:
+            account_id:
+              displayName: Account id
+            role_id:
+              displayName: Role id
+            role:
+              displayName: role
+          uriParameters:
+            account_id:
+              displayName: Account id
+            id:
+              displayName: id
+        ignored: false
+  /accounts/{accountId}/terms/{termId}:
+    ignored: false
+    operations:
+      get:
+        displayName: Get enrollment term
+        description: Retrieve details for a single enrollment term.
+        outputMediaType: application/json
+        expects:
+          uriParameters:
+            accountId:
+              displayName: Account Id
+            termId:
+              displayName: Term Id
+        ignored: false
+  /courses/{course_id}/assignments:
+    ignored: false
+    operations:
+      get:
+        displayName: List assignments
+        description: Returns the paginated list of assignments for a course.
+        outputMediaType: application/json
+        expects:
+          uriParameters:
+            course_id:
+              displayName: Course id
+        ignored: false
+  /courses/{course_id}/assignment_groups/{assignment_group_id}/assignments:
+    ignored: false
+    operations:
+      get:
+        displayName: Get assignments in an assignment group
+        description: List assignments for a specific assignment group in a course
+        outputMediaType: application/json
+        expects:
+          uriParameters:
+            course_id:
+              displayName: Course id
+            assignment_group_id:
+              displayName: Assignment group id
+        ignored: false
+  /courses/{course_id}/sections:
+    ignored: false
+    operations:
+      get:
+        displayName: List course sections
+        description: Returns a paginated list of sections for a course
+        outputMediaType: application/json
+        expects:
+          queryParameters:
+            include:
+              displayName: include
+              description: 'Associations to include (students, avatar_url, enrollments, total_students, passback_status, permissions)'
+            search_term:
+              displayName: Search term
+              description: Searches course sections for the term. Minimum 2 characters.
+          uriParameters:
+            course_id:
+              displayName: Course id
+        ignored: false
+      post:
+        displayName: Create Section
+        description: Creates a new section for this course.
+        inputMediaType: application/json
+        outputMediaType: application/json
+        expects:
+          uriParameters:
+            course_id:
+              displayName: Course id
+        ignored: false
+  /courses/{course_id}/sections/{id}:
+    ignored: false
+    operations:
+      get:
+        displayName: Get section information
+        description: Get details about a specific section by course and section ID
+        outputMediaType: application/json
+        expects:
+          queryParameters:
+            include:
+              displayName: include
+              description: 'Associations to include (students, avatar_url, enrollments, total_students, passback_status, permissions)'
+          uriParameters:
+            course_id:
+              displayName: Course id
+            id:
+              displayName: id
+        ignored: false
+  /courses/{course_id}/enrollments:
+    ignored: false
+    operations:
+      get:
+        displayName: List enrollments in a course
+        description: Returns a paginated list of all enrollments in a course.
+        outputMediaType: application/json
+        expects:
+          queryParameters:
+            type:
+              displayName: type
+              description: 'Enrollment types to return (StudentEnrollment, TeacherEnrollment, TaEnrollment, DesignerEnrollment, ObserverEnrollment).'
+            role:
+              displayName: role
+              description: Enrollment roles to return.
+            state:
+              displayName: state
+              description: Filter by enrollment state.
+            include:
+              displayName: include
+              description: 'Additional information to include (avatar_url, group_ids, locked, observed_users, can_be_removed, uuid, current_points).'
+            user_id:
+              displayName: User id
+              description: Filter by user_id.
+            grading_period_id:
+              displayName: Grading period id
+              description: Grading period for grades.
+            enrollment_term_id:
+              displayName: Enrollment term id
+              description: Enrollment term filter (only user enrollments).
+            sis_account_id:
+              displayName: Sis account id
+              description: SIS account ID filter.
+            sis_course_id:
+              displayName: Sis course id
+              description: SIS course ID filter.
+            sis_section_id:
+              displayName: Sis section id
+              description: SIS section ID filter.
+            sis_user_id:
+              displayName: Sis user id
+              description: SIS user ID filter.
+            created_for_sis_id:
+              displayName: Created for sis id
+              description: Filter enrollments created for SIS ID.
+          uriParameters:
+            course_id:
+              displayName: Course id
+        ignored: false
+      post:
+        displayName: Enroll a user in a course
+        description: Create a new user enrollment for a course.
+        inputMediaType: application/json
+        outputMediaType: application/json
+        expects:
+          uriParameters:
+            course_id:
+              displayName: Course id
+        ignored: false
+  /sections/{section_id}/enrollments:
+    ignored: false
+    operations:
+      get:
+        displayName: List enrollments in a section
+        description: Returns a paginated list of all enrollments in a section.
+        outputMediaType: application/json
+        expects:
+          queryParameters:
+            type:
+              displayName: type
+              description: 'Enrollment types to return (StudentEnrollment, TeacherEnrollment, TaEnrollment, DesignerEnrollment, ObserverEnrollment).'
+            role:
+              displayName: role
+              description: Enrollment roles to return.
+            state:
+              displayName: state
+              description: Filter by enrollment state.
+            include:
+              displayName: include
+              description: 'Additional information to include (avatar_url, group_ids, locked, observed_users, can_be_removed, uuid, current_points).'
+            user_id:
+              displayName: User id
+              description: Filter by user_id.
+            grading_period_id:
+              displayName: Grading period id
+              description: Grading period for grades.
+            enrollment_term_id:
+              displayName: Enrollment term id
+              description: Enrollment term filter (only user enrollments).
+            sis_account_id:
+              displayName: Sis account id
+              description: SIS account ID filter.
+            sis_course_id:
+              displayName: Sis course id
+              description: SIS course ID filter.
+            sis_section_id:
+              displayName: Sis section id
+              description: SIS section ID filter.
+            sis_user_id:
+              displayName: Sis user id
+              description: SIS user ID filter.
+            created_for_sis_id:
+              displayName: Created for sis id
+              description: Filter enrollments created for SIS ID.
+          uriParameters:
+            section_id:
+              displayName: Section id
+        ignored: false
+      post:
+        displayName: Enroll a user in a section
+        description: Create a new user enrollment for a section.
+        inputMediaType: application/json
+        outputMediaType: application/json
+        expects:
+          uriParameters:
+            section_id:
+              displayName: Section id
+        ignored: false
+  /users/{user_id}/enrollments:
+    ignored: false
+    operations:
+      get:
+        displayName: List enrollments of a user
+        description: Returns a paginated list of all enrollments for a user.
+        outputMediaType: application/json
+        expects:
+          queryParameters:
+            type:
+              displayName: type
+              description: 'Enrollment types to return (StudentEnrollment, TeacherEnrollment, TaEnrollment, DesignerEnrollment, ObserverEnrollment).'
+            role:
+              displayName: role
+              description: Enrollment roles to return.
+            state:
+              displayName: state
+              description: Filter by enrollment state.
+            include:
+              displayName: include
+              description: 'Additional information to include (avatar_url, group_ids, locked, observed_users, can_be_removed, uuid, current_points).'
+            user_id:
+              displayName: User id
+              description: Filter by user_id.
+            grading_period_id:
+              displayName: Grading period id
+              description: Grading period for grades.
+            enrollment_term_id:
+              displayName: Enrollment term id
+              description: Enrollment term filter (only user enrollments).
+            sis_account_id:
+              displayName: Sis account id
+              description: SIS account ID filter.
+            sis_course_id:
+              displayName: Sis course id
+              description: SIS course ID filter.
+            sis_section_id:
+              displayName: Sis section id
+              description: SIS section ID filter.
+            sis_user_id:
+              displayName: Sis user id
+              description: SIS user ID filter.
+            created_for_sis_id:
+              displayName: Created for sis id
+              description: Filter enrollments created for SIS ID.
+          uriParameters:
+            user_id:
+              displayName: User id
+        ignored: false
+  /accounts/{account_id}/enrollments/{id}:
+    ignored: false
+    operations:
+      get:
+        displayName: Get Enrollment by ID
+        description: Get an Enrollment object by Enrollment ID
+        outputMediaType: application/json
+        expects:
+          uriParameters:
+            account_id:
+              displayName: Account id
+            id:
+              displayName: id
+        ignored: false
+  /courses/{course_id}/students/submissions:
+    ignored: false
+    operations:
+      get:
+        displayName: List submissions for multiple assignments by course
+        description: List submissions for multiple assignments by course
+        outputMediaType: application/json
+        expects:
+          queryParameters:
+            student_ids:
+              displayName: Student ids
+              description: List of student ids to return submissions for.
+            assignment_ids:
+              displayName: Assignment ids
+              description: List of assignment ids to return submissions for.
+            grouped:
+              displayName: grouped
+              description: 'If true, response will be grouped by students instead of a flat array.'
+            post_to_sis:
+              displayName: Post to sis
+              description: Only include submissions for SIS assignments/enrollments.
+            submitted_since:
+              displayName: Submitted since
+              description: Only submissions after specified date (ISO8601).
+            graded_since:
+              displayName: Graded since
+              description: Only submissions graded after specified date (ISO8601).
+            grading_period_id:
+              displayName: Grading period id
+            workflow_state:
+              displayName: Workflow state
+            enrollment_state:
+              displayName: Enrollment state
+            state_based_on_date:
+              displayName: State based on date
+            order:
+              displayName: order
+            order_direction:
+              displayName: Order direction
+            include:
+              displayName: include
+              description: 'Associations to include (submission_history, submission_comments, etc.)'
+          uriParameters:
+            course_id:
+              displayName: Course id
+        ignored: false
+  /sections/{section_id}/students/submissions:
+    ignored: false
+    operations:
+      get:
+        displayName: List submissions for multiple assignments by section
+        description: List submissions for multiple assignments by section
+        outputMediaType: application/json
+        expects:
+          queryParameters:
+            student_ids:
+              displayName: Student ids
+              description: List of student ids to return submissions for.
+            assignment_ids:
+              displayName: Assignment ids
+              description: List of assignment ids to return submissions for.
+            grouped:
+              displayName: grouped
+              description: 'If true, response will be grouped by students instead of a flat array.'
+            post_to_sis:
+              displayName: Post to sis
+              description: Only include submissions for SIS assignments/enrollments.
+            submitted_since:
+              displayName: Submitted since
+              description: Only submissions after specified date (ISO8601).
+            graded_since:
+              displayName: Graded since
+              description: Only submissions graded after specified date (ISO8601).
+            grading_period_id:
+              displayName: Grading period id
+            workflow_state:
+              displayName: Workflow state
+            enrollment_state:
+              displayName: Enrollment state
+            state_based_on_date:
+              displayName: State based on date
+            order:
+              displayName: order
+            order_direction:
+              displayName: Order direction
+            include:
+              displayName: include
+              description: 'Associations to include (submission_history, submission_comments, etc.)'
+          uriParameters:
+            section_id:
+              displayName: Section id
+        ignored: false
+  /accounts:
+    ignored: false
+    operations:
+      get:
+        displayName: List accounts
+        description: A paginated list of accounts that the current user can view or manage.
+        outputMediaType: application/json
+        expects:
+          queryParameters:
+            include[]:
+              displayName: 'include[]'
+              description: 'Array of additional information to include.
+Allowed values: `lti_guid`, `registration_settings`, `services`, `course_count`, `sub_account_count`
+'
+        ignored: false
+  /accounts/{id}:
+    ignored: false
+    operations:
+      get:
+        displayName: Get Account by ID
+        description: 'Retrieve information on an individual account, given by id or sis_account_id.'
+        outputMediaType: application/json
+        expects:
+          uriParameters:
+            id:
+              displayName: id
+        ignored: false
+  /accounts/{account_id}/sub_accounts:
+    ignored: false
+    operations:
+      get:
+        displayName: List Sub-Accounts
+        description: List Sub-Accounts
+        outputMediaType: application/json
+        expects:
+          queryParameters:
+            recursive:
+              displayName: recursive
+              description: 'If true, return entire account tree. Defaults to false.'
+            order:
+              displayName: order
+              description: Sort the accounts by `id` or `name`. Only applies when recursive is false.
+            include[]:
+              displayName: 'include[]'
+          uriParameters:
+            account_id:
+              displayName: Account id
+        ignored: false
+  /sections/{id}/crosslist:
+    ignored: false
+    operations:
+      delete:
+        displayName: De-cross-list a section
+        description: De-cross-list a section
+        outputMediaType: application/json
+        expects:
+          queryParameters:
+            override_sis_stickiness:
+              displayName: Override sis stickiness
+          uriParameters:
+            id:
+              displayName: id
+        ignored: false
+  /sections/{id}:
+    ignored: false
+    operations:
+      delete:
+        displayName: Delete a section
+        description: Delete a section
+        outputMediaType: application/json
+        expects:
+          uriParameters:
+            id:
+              displayName: id
+        ignored: false
+      put:
+        displayName: Update a Section
+        description: Modify an existing section.
+        inputMediaType: application/json
+        outputMediaType: application/json
+        expects:
+          uriParameters:
+            id:
+              displayName: id
+        ignored: false
+  /courses/{course_id}/enrollments/{id}:
+    ignored: false
+    operations:
+      delete:
+        displayName: 'Conclude, deactivate, or delete an enrollment'
+        description: 'Conclude, deactivate, or delete an enrollment'
+        outputMediaType: application/json
+        expects:
+          queryParameters:
+            task:
+              displayName: task
+          uriParameters:
+            course_id:
+              displayName: Course id
+            id:
+              displayName: id
+        ignored: false
+  /accounts/{account_id}/terms/{id}:
+    ignored: false
+    operations:
+      delete:
+        displayName: Delete enrollment term
+        description: Delete enrollment term
+        outputMediaType: application/json
+        expects:
+          uriParameters:
+            account_id:
+              displayName: Account id
+            id:
+              displayName: id
+        ignored: false
+      put:
+        displayName: Update enrollment term
+        description: Update an existing enrollment term for the specified account.
+        inputMediaType: application/json
+        outputMediaType: application/json
+        expects:
+          uriParameters:
+            account_id:
+              displayName: Account id
+            id:
+              displayName: id
+        ignored: false
+  /users/{user_id}/logins/{id}:
+    ignored: false
+    operations:
+      delete:
+        displayName: Delete a user login
+        description: Delete a user login
+        outputMediaType: application/json
+        expects:
+          uriParameters:
+            user_id:
+              displayName: User id
+            id:
+              displayName: id
+        ignored: false
+  /accounts/{account_id}/bulk_enrollment:
+    ignored: false
+    operations:
+      post:
+        displayName: Bulk enroll users in courses
+        description: Enrolls multiple users in one or more courses in a single operation.
+        inputMediaType: application/json
+        outputMediaType: application/json
+        expects:
+          uriParameters:
+            account_id:
+              displayName: Account id
+        ignored: false
+  /sections/{id}/crosslist/{new_course_id}:
+    ignored: false
+    operations:
+      post:
+        displayName: Cross-list Section
+        description: Move the section to another course. The new course must belong to the same root account.
+        inputMediaType: application/json
+        outputMediaType: application/json
+        expects:
+          uriParameters:
+            id:
+              displayName: id
+            new_course_id:
+              displayName: New course id
+        ignored: false
+  /accounts/{account_id}/logins:
+    ignored: false
+    operations:
+      post:
+        displayName: Create Login
+        description: Create a new login for an existing user in the given account.
+        inputMediaType: application/json
+        outputMediaType: application/json
+        expects:
+          uriParameters:
+            account_id:
+              displayName: Account id
+        ignored: false
+  /accounts/{account_id}/terms:
+    ignored: false
+    operations:
+      get:
+        displayName: List enrollment terms
+        description: Returns the list of enrollment terms for the account.
+        outputMediaType: application/json
+        expects:
+          uriParameters:
+            account_id:
+              displayName: Account id
+        ignored: false
+      post:
+        displayName: Create a new enrollment term for the specified account
+        description: Create a new enrollment term for the specified account.
+        inputMediaType: application/json
+        outputMediaType: application/json
+        expects:
+          uriParameters:
+            account_id:
+              displayName: Account id
+        ignored: false
+  /accounts/{account_id}/logins/{id}:
+    ignored: false
+    operations:
+      put:
+        displayName: Update a user login
+        description: Update an existing login for a user in the given account.
+        inputMediaType: application/json
+        outputMediaType: application/json
+        expects:
+          uriParameters:
+            account_id:
+              displayName: Account id
+            id:
+              displayName: id
+        ignored: false
+  /courses/{course_id}/enrollments/{id}/reactivate:
+    ignored: false
+    operations:
+      put:
+        displayName: Reactivate Enrollment
+        description: Activates an inactive enrollment.
+        outputMediaType: application/json
+        expects:
+          uriParameters:
+            course_id:
+              displayName: Course id
+            id:
+              displayName: id
+        ignored: false
